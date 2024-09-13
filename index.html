@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="sweetalert2/sweetalert2.min.css">
+    <title>Sistema de ventas</title>
+</head>
+
+<body class="bg-light position-relative">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid d-flex">
+            <a class="navbar-brand" href="#">Sistema de ventas</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                <!-- <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Productos</a>
+                    <a class="nav-link" href="#">Ventas</a>
+                    <a class="nav-link" href="#">Reconocimientos</a>
+                    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Inciar Sesión</a>
+                </div> -->
+            </div>
+        </div>
+    </nav>
+    <div class="container flex-wrap bg-light d-flex align-content-center h-100 mt-5">
+        <div class="col-6 px-2">
+            <form id="formulario" action="" class="form-control">
+                <div class="mb-3">
+                    <label for="vendedor">Vendedor</label>
+                    <select name="vendedor" id="vendedor" class="form-control">
+                        <option value="">--Elige un Vendedor--</option>
+                        <option value="Juana">Juana</option>
+                        <option value="Pedro">Pedro</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <div class="container d-flex px-0">
+                        <div class="col-6">
+                            <label for="producto">Producto</label>
+                            <select name="producto" id="producto" class="form-control">
+                                <option value="">--Elige un producto--</option>
+                                <option value="aqua">Aqua</option>
+                                <option value="emocion">Emoción</option>
+                                <option value="alegria">Alegría</option>
+                                <option value="frescura">Frescura</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="ms-2">
+
+                                        <label for="cantidad">Cantidad</label>
+                                        <input type="number" name="cantidad" id="cantidad" class="form-control" min="1"
+                                            max="100" value="1">
+                                    </div>
+                                </div>
+                                <div class="col ps-0">
+                                    <label for="producto">Precio Unidad</label>
+                                    <p id="precio" class="form-control">$0 dls</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid gap-2">
+                    <button id="guardar" type="submit" class="btn btn-secondary">Guardar Venta</button>
+                </div>
+            </form>
+            <!-- Ventas combinadas -->
+            <div class="mt-3 form-control">
+                <table class="table" id="tabla-totales">
+                    <thead>
+                        <tr>
+                            <th scope="col">Vendedor</th>
+                            <th scope="col">Ventas</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody> </tbody>
+                </table>
+                <div class="d-grid gap-2">
+                    <button id="ganador" type="submit" class="btn btn-outline-secondary">Mostrar Ganador</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 px-2">
+        <!-- Ventas de Juana -->
+            <div class="form-control mb-3">
+                <h5>Ventas de Juana</h5>
+                <table class="table" id="ventas-juana">
+                    <thead>
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot></tfoot>
+                </table>
+
+            </div>
+            <!-- Ventas de Pedro -->
+            <div class="form-control">
+                <h5>Ventas de Pedro</h5>
+                <table class="table" id="ventas-pedro">
+                    <thead>
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot></tfoot>
+                </table>
+
+            </div>
+        </div>
+        <div class="container mt-3">
+            <div class="row px-2 text-center">
+                <div class="col form-control" id="premio">
+                    <h3 class="text-capitalize">felicidades</h3>
+                    <h4></h4>
+                    <p class="form-control"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- alerta exito -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="liveToastSuccess" class="toast bg-success-subtle" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-check"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z" />
+                </svg>
+                </div>
+                <strong class="me-auto">Operación exitosa</strong>
+                <small></small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div id="mensajeEx" class="toast-body">
+                
+            </div>
+        </div>
+    </div>
+    <!-- alerta error -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="liveToastError" class="toast bg-danger-subtle" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <div class="icon me-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-exclamation-diamond"
+                        viewBox="0 0 18 18">
+                        <path
+                            d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.48 1.48 0 0 1 0-2.098zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z" />
+                        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z" />
+                    </svg>
+                </div>
+                <strong class="me-auto">Error en los datos</strong>
+                <small></small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div id="mensajeEr" class="toast-body">
+                
+            </div>
+        </div>
+    </div>
+
+
+    <script src="./bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="sweetalert2/sweetalert2.min.js"></script>
+    <script src="app.js"></script>
+    <script src="bd.js"></script>
+</body>
+
+</html>
