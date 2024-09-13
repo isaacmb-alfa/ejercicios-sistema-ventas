@@ -55,6 +55,7 @@ Si la vetna ya se habia efectuado antes no agrega una nueva linea, solo modifica
 Si se desea eliminar un conjunto de ventas, se puede realizar por medio del botón rojo al final de la linea. Este botón muestra una alerta de confirmación o negación de la acción para que el usuraio pueda cancelar la acción.
 
 
+
 ---
 
 ⌨️ con ❤️ por [Isaac Manríquez](https://github.com/isaacmb-alfa) 😊
